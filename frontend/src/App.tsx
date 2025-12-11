@@ -1,28 +1,33 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
-
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
-
-    return (
-        <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
-            <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
+  return (
+    <>  
+        <div id='app'>
+            <header>
+                <h1 id='headline'>Dashboard</h1>
+            </header>
+            <div id='div_body'>
+                <div id='div_sidebar'>
+                    <Button href='/'>Dashboard</Button>
+                    <Button href='/metar'>Metar</Button>
+                    <Button href='/flightplan'>Flugplan</Button>
+                </div>
+                <div id='div_content'>
+                    <BrowserRouter>
+                        <Routes>
+                        <Route path="/" element={<p>value</p>} />
+                        <Route path="/metar" element={<h1>Metar</h1>} />
+                        <Route path="/flightplan" element={<h1>Flugplan</h1>} />
+                        </Routes>
+                    </BrowserRouter>
+                </div>
             </div>
         </div>
-    )
+    </>
+  );
 }
-
-export default App
+ 
+export default App;
